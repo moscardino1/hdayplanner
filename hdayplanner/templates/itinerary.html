@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}Itinerary for {{ trip.title }}{% endblock %}
+
+{% block content %}
+<div class="itinerary-container">
+    <h1>Itinerary for {{ trip.title }}</h1>
+    <form id="itineraryForm">
+        <table class="itinerary-table">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>City</th>
+                    <th>Hotel</th>
+                    <th>Morning Activity</th>
+                    <th>Lunch</th>
+                    <th>Afternoon Activity</th>
+                    <th>Dinner</th>
+                </tr>
+            </thead>
+            <tbody id="itineraryDays">
+                {% for item in itineraries %}
+                <tr>
+                    <td>{{ item.date.strftime('%Y-%m-%d') }}</td>
+                    <td><input type="text" name="city" value="{{ item.city }}"></td>
+                    <td><input type="text" name="hotel" value="{{ item.hotel }}"></td>
+                    <td><input type="text" name="morning_activity" value="{{ item.morning_activity }}"></td>
+                    <td><input type="text" name="lunch" value="{{ item.lunch }}"></td>
+                    <td><input type="text" name="afternoon_activity" value="{{ item.afternoon_activity }}"></td>
+                    <td><input type="text" name="dinner" value="{{ item.dinner }}"></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <button type="submit" class="submit-button">Update Itinerary</button>
+    </form>
+</div>
+{% endblock %} 

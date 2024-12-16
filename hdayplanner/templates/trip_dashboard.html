@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Trip Dashboard{% endblock %}
+
+{% block content %}
+<div class="trip-dashboard-container">
+    <h1>Your Trips</h1>
+    <ul class="trip-list">
+        {% for trip in trips %}
+        <li>
+            <a href="{{ url_for('trip_details', trip_id=trip.id) }}">{{ trip.title }}</a>
+            <span>{{ trip.start_date.strftime('%b %d, %Y') }} - {{ trip.end_date.strftime('%b %d, %Y') }}</span>
+        </li>
+        {% endfor %}
+    </ul>
+    <a href="{{ url_for('create_trip') }}" class="action-button">Create New Trip</a>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/trip_detail.js') }}"></script>
+{% endblock %} 

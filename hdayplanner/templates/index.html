@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}Welcome to H-DayPlanner{% endblock %}
+
+{% block content %}
+<div class="hero-section">
+    <div class="hero-content">
+        <h1 class="hero-title">Plan Your Perfect Trip</h1>
+        <p class="hero-subtitle">Organize your travel itinerary, track expenses, and get daily updates</p>
+        <a href="{{ url_for('create_trip') }}" class="cta-button">Start Planning</a>
+    </div>
+</div>
+
+<div class="features-section">
+    <div class="feature-card">
+        <div class="feature-icon">📅</div>
+        <h3>Dynamic Calendar</h3>
+        <p>Plan your daily activities with an interactive calendar view</p>
+    </div>
+    <div class="feature-card">
+        <div class="feature-icon">💰</div>
+        <h3>Budget Tracking</h3>
+        <p>Keep your expenses in check with real-time budget monitoring</p>
+    </div>
+    <div class="feature-card">
+        <div class="feature-icon">🔔</div>
+        <h3>Daily Updates</h3>
+        <p>Get notifications about your daily itinerary and reservations</p>
+    </div>
+</div>
+
+<div class="trips-section">
+    <h2>Your Trips</h2>
+    <div class="trip-carousel">
+        {% for trip in trips %}
+        <div class="trip-card">
+            <img src="https://source.unsplash.com/featured/?{{ trip.title }}" alt="{{ trip.title }}">
+            <h3>{{ trip.title }}</h3>
+            <p>{{ trip.start_date.strftime('%b %d, %Y') }} - {{ trip.end_date.strftime('%b %d, %Y') }}</p>
+            <a href="{{ url_for('trip_details', trip_id=trip.id) }}" class="button">View Itinerary</a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

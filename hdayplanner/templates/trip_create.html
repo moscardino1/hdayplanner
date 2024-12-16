@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block title %}{{ trip.title if trip else 'Create New Trip' }}{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+{% endblock %}
+
+{% block content %}
+<div class="create-trip-container">
+    <h1>{{ trip.title if trip else 'Plan Your New Adventure' }}</h1>
+    
+    <form id="tripForm" class="trip-form" data-remote="true">
+        <div class="form-group">
+            <label for="tripTitle">Trip Title</label>
+            <input type="text" id="tripTitle" name="title" value="{{ trip.title if trip else 'My Awesome Trip' }}" required pattern=".{3,}" title="Trip title must be at least 3 characters long">
+        </div>
+
+        <div class="form-group date-range">
+            <div>
+                <label for="startDate">Start Date</label>
+                <input type="date" id="startDate" name="start_date" value="{{ trip.start_date.strftime('%Y-%m-%d') if trip else '2024-01-01' }}" required>
+            </div>
+            <div>
+                <label for="endDate">End Date</label>
+                <input type="date" id="endDate" name="end_date" value="{{ trip.end_date.strftime('%Y-%m-%d') if trip else '2024-01-07' }}" required>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="totalBudget">Total Budget ($)</label>
+            <input type="number" id="totalBudget" name="total_budget" value="{{ trip.total_budget if trip else 1500 }}" required>
+            <div id="budgetInfo"></div>
+        </div>
+
+        <div class="form-group flight-details">
+            <h3>Flight Details</h3>
+            <div>
+                <label for="departureFlightNumber">Departure Flight</label>
+                <input type="text" id="departureFlightNumber" name="departure_flight" value="AA123" required>
+            </div>
+            <div>
+                <label for="returnFlightNumber">Return Flight</label>
+                <input type="text" id="returnFlightNumber" name="return_flight" value="AA456" required>
+            </div>
+        </div>
+
+        <div id="calendar" class="calendar"></div>
+
+        <div class="form-group">
+            <label for="flightCost">Flight Cost ($)</label>
+            <input type="number" id="flightCost" name="flight_cost" value="300" required>
+        </div>
+        <div class="form-group">
+            <label for="carRentalCost">Car Rental Cost ($)</label>
+            <input type="number" id="carRentalCost" name="car_rental_cost" value="200" required>
+        </div>
+
+        
+
+        <button type="submit" class="submit-button">{{ 'Update Trip' if trip else 'Create Trip' }}</button>
+    </form>
+
+    <button id="goToItinerary" class="action-button">Go to Itinerary</button>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="{{ url_for('static', filename='js/trip_create.js') }}"></script>
+<script src="{{ url_for('static', filename='js/trip_detail.js') }}"></script>
+{% endblock %}

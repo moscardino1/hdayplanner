@@ -1,0 +1,30 @@
+/* Responsive styles */
+@media (max-width: 768px) {
+    .nav-links {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .hero-title {
+        font-size: 2.5rem;
+    }
+
+    .trip-card {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .trip-dashboard-container {
+        padding: 1rem;
+    }
+
+    .create-trip-container {
+        padding: 1rem;
+    }
+
+    .itinerary-table {
+        font-size: 0.9rem;
+    }
+}
+
+/* Add more media queries as needed */ 

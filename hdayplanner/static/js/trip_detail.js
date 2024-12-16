@@ -1,0 +1,1 @@
+// Placeholder for trip detail JavaScript functionality 
